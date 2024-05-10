@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/md-dark-deeppurple/theme.css";
+@import "primeng/resources/primeng.min.css";
+@import "primeflex/primeflex.scss";
+@import "primeflex/themes/primeone-dark.scss";
+@import "primeicons/primeicons.css";
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #19191c;
+  color: #FFF;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  font-family: "Inter var", sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-variation-settings: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1.5rem 0 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--surface-900);
+}

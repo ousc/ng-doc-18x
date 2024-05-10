@@ -1,0 +1,13 @@
+{
+  "HOME": "首页",
+  "DOCUMENTATION": "文档",
+  "RESOURCES": "资源",
+  "DISCUSSION": "交流",
+  "REDEFINE": "重新定义",
+  "DESCRIPTION1": "Kronos是一个轻量级的框架，为开发者提供了高效的数据持久化解决方案。",
+  "DESCRIPTION2": "K2编译器插件驱动，分析IR表达式树简化代码编写逻辑、侵入性低、无需定义多余的实体类，提供协程和任务机制为数据操作提供更加便捷和高效的编写体验。",
+  "DESCRIPTION3": "Kronos支持多种常见关系型数据库，包括Mysql、Oracle、Postgres、Mssql、SQLite、DB2、Sybase和H2，以及国产数据库OceanBase和DM8。",
+  "GET_START": "快速上手",
+  "GIVE_A_STAR": "添加星标",
+  "RUN": "运行"
+}
