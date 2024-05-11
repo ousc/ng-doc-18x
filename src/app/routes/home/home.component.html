@@ -30,10 +30,13 @@
       <div class="flex">
         <div style="height: 60vh;width: 100%">
           <div class="card">
-            <p-table [columns]="cols" [value]="products"
-                     [paginator]="true"
-                     [rows]="5"
-                     [tableStyle]="{ 'min-width': '50rem' }">
+            <p-table
+              styleClass="p-datatable-sm"
+              [columns]="cols"
+              [value]="products"
+              [paginator]="true"
+              [rows]="5"
+              [tableStyle]="{ 'min-width': '50rem' }">
               <ng-template pTemplate="header" let-columns>
                 <tr>
                   <th *ngFor="let col of columns">
@@ -50,18 +53,37 @@
               </ng-template>
             </p-table>
           </div>
-          <div class="card mt-4">
-            <div class="flex justify-content-end">
-              <p-button>
-                <span class="pi pi-play"></span>
-                <span>{{ 'RUN' | translate }}</span>
-              </p-button>
-            </div>
-            <p-tabMenu
-              [model]="items"
-              [activeItem]="activeItem"
-              (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
-            <div #ktEditor></div>
+          <div class="card my-4">
+            <p-tabView
+              [(activeIndex)]="index">
+              @for (item of codes;let i = $index;track i) {
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <span class="p-menuitem-icon" [class]="item.icon"></span>
+                    <span class="ml-2 ng-star-inserted">
+                      {{ item.label | translate }}
+                    </span>
+                  </ng-template>
+                  @if (i == index) {
+                    <div class="flex w-full">
+                      <div class="run-column flex-shrink-0" style="margin-top: 4px">
+                        @for (index of [].constructor(item.rowNum);let j = $index;track j) {
+                          <div class="w-2rem text-center" style="height: 1.4rem; line-height: 1.6rem">
+                            @if (item.runnable[j]) {
+                              <span class="pi pi-play text-green-500 cursor-pointer"></span>
+                            }
+                            @if (item.tip[j]) {
+                              <span [pTooltip]="item.tip[j]" class="pi pi-question-circle text-blue-500 cursor-pointer"></span>
+                            }
+                          </div>
+                        }
+                      </div>
+                      <codemirror styleClass="flex-grow-1 max-w-full" [disabled]="true" [(ngModel)]="item.doc"/>
+                    </div>
+                  }
+                </p-tabPanel>
+              }
+            </p-tabView>
           </div>
         </div>
       </div>

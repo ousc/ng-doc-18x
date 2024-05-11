@@ -10,8 +10,10 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {TableModule} from "primeng/table";
-import {TabMenuModule} from "primeng/tabmenu";
 import {MenuModule} from "primeng/menu";
+import {TabViewModule} from "primeng/tabview";
+import {SkeletonModule} from "primeng/skeleton";
+import {TooltipModule} from "primeng/tooltip";
 
 const primengModules = [
   ButtonModule,
@@ -20,8 +22,10 @@ const primengModules = [
   DropdownModule,
   OverlayPanelModule,
   TableModule,
-  TabMenuModule,
-  MenuModule
+  TabViewModule,
+  MenuModule,
+  SkeletonModule,
+  TooltipModule
 ];
 
 const i18nModules = [TranslateModule];
