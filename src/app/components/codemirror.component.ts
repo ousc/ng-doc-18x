@@ -24,8 +24,8 @@ import {SharedModule} from "../shared.module";
     SharedModule
   ],
   template: `
-      <div #editorInstance [class]="styleClass"></div>
-      <p-skeleton *ngIf="!editorView" width="100%" height="150px"/>
+      <div #editorInstance [class]="styleClass" style="background: #282c34"></div>
+      <p-skeleton class="w-full" *ngIf="!editorView" [class]="styleClass" height="250px"/>
   `,
   standalone: true,
   styles: [

@@ -12,9 +12,9 @@ import {SharedModule} from "../../../shared.module";
   template: `
     <p-megaMenu [model]="items" [styleClass]="'border-none menu-bar p-0 pl-4'">
       <ng-template pTemplate="start">
-        <img src="https://cdn.leinbo.com/assets/images/kronos/logo_dark.png" class="logo" draggable="false"
+        <img [routerLink]="['/']" src="https://cdn.leinbo.com/assets/images/kronos/logo_dark.png" class="logo" draggable="false"
              [style.width.px]="60" alt="logo"/>
-        <span class="logo">Kronos ORM</span>
+        <span [routerLink]="['/']" class="logo">Kronos ORM</span>
       </ng-template>
       <ng-template pTemplate="item" let-item>
         <a *ngIf="item.root" pRipple [routerLink]="item.routerLink" routerLinkActive="p-menuitem-active"
@@ -22,7 +22,7 @@ import {SharedModule} from "../../../shared.module";
           <i [ngClass]="item.icon"></i>
           <span class="mx-2">{{ item.label | translate }}</span>
         </a>
-        <a *ngIf="!item.root && !item.image" class="flex align-items-center p-3 cursor-pointer mb-2 gap-2">
+        <a *ngIf="!item.root && !item.image" [routerLink]="item.routerLink" class="flex align-items-center p-3 cursor-pointer mb-2 gap-2">
                 <span
                   class="inline-flex align-items-center justify-content-center border-circle bg-primary w-3rem h-3rem">
                     <i [ngClass]="item.icon + ' text-lg'"></i>
@@ -32,7 +32,7 @@ import {SharedModule} from "../../../shared.module";
                     <span class="white-space-nowrap">{{ item.subtext }}</span>
                 </span>
         </a>
-        <div *ngIf="item.image" class="flex flex-column align-items-start gap-3">
+        <div [routerLink]="item.routerLink" *ngIf="item.image" class="flex flex-column align-items-start gap-3 p-2">
           <img [src]="item.image" alt="megamenu-demo" class="w-full"/>
           <span>{{ item.subtext }}</span>
           <p-button [label]="item.label" [outlined]="true"></p-button>
@@ -130,36 +130,37 @@ export class LayoutMenuBarComponent {
           [
             {
               items: [
-                {label: 'Features', icon: 'pi pi-list', subtext: 'Subtext of item'},
-                {label: 'Customers', icon: 'pi pi-users', subtext: 'Subtext of item'},
-                {label: 'Case Studies', icon: 'pi pi-file', subtext: 'Subtext of item'}
+                {label: '特性', icon: 'pi pi-list', subtext: 'Subtext of item'},
+                {label: '快速上手', icon: 'pi pi-users', subtext: 'Subtext of item'},
+                {label: '配置指南', icon: 'pi pi-file', subtext: 'Subtext of item'}
               ]
             }
           ],
           [
             {
               items: [
-                {label: 'Solutions', icon: 'pi pi-shield', subtext: 'Subtext of item'},
-                {label: 'Faq', icon: 'pi pi-question', subtext: 'Subtext of item'},
-                {label: 'Library', icon: 'pi pi-search', subtext: 'Subtext of item'}
+                {label: '数据类型', icon: 'pi pi-shield', subtext: 'Subtext of item'},
+                {label: '数据操作', icon: 'pi pi-question', subtext: 'Subtext of item'},
+                {label: '数据库类型', icon: 'pi pi-search', subtext: 'Subtext of item'}
               ]
             }
           ],
           [
             {
               items: [
-                {label: 'Community', icon: 'pi pi-comments', subtext: 'Subtext of item'},
-                {label: 'Rewards', icon: 'pi pi-star', subtext: 'Subtext of item'},
-                {label: 'Investors', icon: 'pi pi-globe', subtext: 'Subtext of item'}
+                {label: '异步任务', icon: 'pi pi-comments', subtext: 'Subtext of item'},
+                {label: '第三方框架', icon: 'pi pi-star', subtext: 'Subtext of item'},
+                {label: 'FAQ', icon: 'pi pi-globe', subtext: 'Subtext of item'}
               ]
             }
           ],
           [
             {
               items: [{
-                image: 'https://primefaces.org/cdn/primeng/images/uikit/uikit-system.png',
-                label: 'GET STARTED',
-                subtext: 'Build spectacular apps in no time.'
+                image: 'https://cdn.leinbo.com/assets/images/kronos/code-cover.jpg',
+                label: '快速上手',
+                subtext: '立刻体验Kronos ORM',
+                routerLink: ["/documentation/quick-start"]
               }]
             }
           ]

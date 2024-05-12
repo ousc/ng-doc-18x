@@ -9,5 +9,12 @@
   "DESCRIPTION3": "Kronos支持多种常见关系型数据库，包括Mysql、Oracle、Postgres、Mssql、SQLite、DB2、Sybase和H2，以及国产数据库OceanBase和DM8。",
   "GET_START": "快速上手",
   "GIVE_A_STAR": "添加星标",
-  "RUN": "运行"
+  "RUN": "运行",
+  "GO_TO_HOME": "返回首页",
+  "PAGE_NOT_FOUND": "页面未找到",
+  "KPOJO_DESCRIPTION[0]": "您可以通过[Table]注解指定data class对应的表名。",
+  "KPOJO_DESCRIPTION[1]": "请确保您的数据类拥有无参数的构造函数。",
+  "KPOJO_DESCRIPTION[2]": "你可以通过[Column]注解指定类属性对应的列名。",
+  "KPOJO_DESCRIPTION[3]": "您的data class必须继承接口[KPojo]。",
+  "TERMINAL_WELCOME": "欢迎使用Kronos, `help`查看帮助，`clear`清空屏幕"
 }

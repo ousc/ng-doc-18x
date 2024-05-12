@@ -14,6 +14,9 @@ import {MenuModule} from "primeng/menu";
 import {TabViewModule} from "primeng/tabview";
 import {SkeletonModule} from "primeng/skeleton";
 import {TooltipModule} from "primeng/tooltip";
+import {TerminalModule} from "primeng/terminal";
+import {InputTextModule} from "primeng/inputtext";
+import {CardModule} from "primeng/card";
 
 const primengModules = [
   ButtonModule,
@@ -25,7 +28,10 @@ const primengModules = [
   TabViewModule,
   MenuModule,
   SkeletonModule,
-  TooltipModule
+  TooltipModule,
+  TerminalModule,
+  InputTextModule,
+  CardModule
 ];
 
 const i18nModules = [TranslateModule];

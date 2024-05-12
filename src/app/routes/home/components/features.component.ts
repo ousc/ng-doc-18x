@@ -1,0 +1,55 @@
+import {Component} from '@angular/core';
+import {SharedModule} from "../../../shared.module";
+
+@Component({
+  selector: 'features',
+  imports: [
+    SharedModule,
+  ],
+  template: `
+    <div class="flex flex-wrap justify-content-center gap-3 overflow-hidden">
+      <p-card header="Kotlin multiplatform support" subheader="Card Subheader" [style]="{ minWidth: 'calc(100vw / 3)', maxWidth: '525px'}">
+        <ng-template pTemplate="header">
+          <img class="card-cover" alt="Kotlin multiplatform support" src="/assets/images/features/img-1.png" />
+        </ng-template>
+        <p>
+          Lorem ipsum dolor sit amet...
+        </p>
+      </p-card>
+      <p-card header="Less runtime reflect, more compile-time task" subheader="Card Subheader" [style]="{ minWidth: 'calc(100vw / 3)', maxWidth: '525px'}">
+        <ng-template pTemplate="header">
+          <img class="card-cover" alt="Less runtime reflect" src="/assets/images/features/img-2.png" />
+        </ng-template>
+        <p>
+          Lorem ipsum dolor sit amet...
+        </p>
+      </p-card>
+      <p-card header="Smarter framework, less code, simple solutions" subheader="Card Subheader" [style]="{ minWidth: 'calc(100vw / 3)', maxWidth: '525px'}">
+        <ng-template pTemplate="header">
+          <img class="card-cover" alt="Smarter framework" src="/assets/images/features/img-3.png" />
+        </ng-template>
+        <p>
+          Lorem ipsum dolor sit amet...
+        </p>
+      </p-card>
+      <p-card header="Easy to integrate with third-party frameworks" subheader="Card Subheader" [style]="{ minWidth: 'calc(100vw / 3)', maxWidth: '525px'}">
+        <ng-template pTemplate="header">
+          <img class="card-cover" alt="Easy plugin integration" src="/assets/images/features/img-4.png" />
+        </ng-template>
+        <p>
+          Lorem ipsum dolor sit amet...
+        </p>
+      </p-card>
+    </div>
+
+  `,
+  standalone: true,
+  styles: [`
+    .card-cover {
+      height: 20rem;
+      object-fit: cover;
+    }
+  `],
+})
+export class FeaturesComponent {
+}

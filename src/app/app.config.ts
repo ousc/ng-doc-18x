@@ -32,11 +32,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideRouter(NG_DOC_ROUTING, withInMemoryScrolling({
+    provideRouter(routes, withInMemoryScrolling({
       scrollPositionRestoration: "enabled",
       anchorScrolling: "enabled"
     })),

@@ -14,7 +14,7 @@ export interface Product {
 export const products: Product[] = [
   {
     "id": "1000",
-    "code": "f230fh0g3",
+    "code": "7F9V0BpQ2W",
     "name": "Bamboo Watch",
     "description": "Product Description",
     "image": "bamboo-watch.jpg",
@@ -26,7 +26,7 @@ export const products: Product[] = [
   },
   {
     "id": "1001",
-    "code": "djkf9843k",
+    "code": "5a3tR8xY9E",
     "name": "Leather Wallet",
     "description": "Stylish leather wallet",
     "image": "leather-wallet.jpg",
@@ -38,7 +38,7 @@ export const products: Product[] = [
   },
   {
     "id": "1002",
-    "code": "wkej349dk",
+    "code": "2K7s6R0j1N",
     "name": "Silver Bracelet",
     "description": "Elegant silver bracelet",
     "image": "silver-bracelet.jpg",
@@ -50,7 +50,7 @@ export const products: Product[] = [
   },
   {
     "id": "1003",
-    "code": "ie943kfw0",
+    "code": "8T4w7X1c0Y",
     "name": "Sunglasses",
     "description": "UV protection sunglasses",
     "image": "sunglasses.jpg",
@@ -59,9 +59,10 @@ export const products: Product[] = [
     "quantity": 30,
     "inventoryStatus": "INSTOCK",
     "rating": 4
-  }, {
+  },
+  {
     "id": "1004",
-    "code": "jgk345gk2",
+    "code": "3M5b1Z8a0R",
     "name": "Leather Bag",
     "description": "Stylish leather bag",
     "image": "leather-bag.jpg",
@@ -73,7 +74,7 @@ export const products: Product[] = [
   },
   {
     "id": "1005",
-    "code": "fj39dkf94",
+    "code": "4J8c5Z1w9T",
     "name": "Smart Watch",
     "description": "Intelligent smart watch",
     "image": "smart-watch.jpg",
@@ -85,7 +86,7 @@ export const products: Product[] = [
   },
   {
     "id": "1006",
-    "code": "dkj349dj3",
+    "code": "HATrU8EB5V",
     "name": "Diamond Ring",
     "description": "Exquisite diamond ring",
     "image": "diamond-ring.jpg",
@@ -97,7 +98,7 @@ export const products: Product[] = [
   },
   {
     "id": "1007",
-    "code": "3j4k9dk43",
+    "code": "wgASVUx1cO",
     "name": "Headphones",
     "description": "High-quality headphones",
     "image": "headphones.jpg",
@@ -109,7 +110,7 @@ export const products: Product[] = [
   },
   {
     "id": "1008",
-    "code": "fj39dkf94",
+    "code": "rEzEXV2hiw",
     "name": "Backpack",
     "description": "Spacious backpack",
     "image": "backpack.jpg",
@@ -121,7 +122,7 @@ export const products: Product[] = [
   },
   {
     "id": "1009",
-    "code": "dkj349dj3",
+    "code": "LtwfbSGJxI",
     "name": "Silver Earrings",
     "description": "Elegant silver earrings",
     "image": "silver-earrings.jpg",
@@ -133,7 +134,7 @@ export const products: Product[] = [
   },
   {
     "id": "1010",
-    "code": "3j4k9dk43",
+    "code": "gdK9PAS5Xq",
     "name": "Wireless Mouse",
     "description": "Ergonomic wireless mouse",
     "image": "wireless-mouse.jpg",
@@ -145,7 +146,7 @@ export const products: Product[] = [
   },
   {
     "id": "1011",
-    "code": "fj39dkf94",
+    "code": "uorP6F8oFM",
     "name": "Travel Bag",
     "description": "Durable travel bag",
     "image": "travel-bag.jpg",
@@ -153,11 +154,11 @@ export const products: Product[] = [
     "category": "Bags",
     "quantity": 8,
     "inventoryStatus": "INSTOCK",
-    "rating": 4.0
+    "rating": 4
   },
   {
     "id": "1012",
-    "code": "dkj349dj3",
+    "code": "zPwRspUC5n",
     "name": "Gold Necklace",
     "description": "Luxurious gold necklace",
     "image": "gold-necklace.jpg",
@@ -169,7 +170,7 @@ export const products: Product[] = [
   },
   {
     "id": "1013",
-    "code": "3j4k9dk43",
+    "code": "gYYxVVbotb",
     "name": "Bluetooth Speaker",
     "description": "Portable Bluetooth speaker",
     "image": "bluetooth-speaker.jpg",
@@ -181,7 +182,7 @@ export const products: Product[] = [
   },
   {
     "id": "1014",
-    "code": "fj39dkf94",
+    "code": "FrZWFVfGkJ",
     "name": "Laptop Bag",
     "description": "Stylish laptop bag",
     "image": "laptop-bag.jpg",
@@ -193,7 +194,7 @@ export const products: Product[] = [
   },
   {
     "id": "1015",
-    "code": "dkj349dj3",
+    "code": "qQaEHwHy2h",
     "name": "Pearl Bracelet",
     "description": "Beautiful pearl bracelet",
     "image": "pearl-bracelet.jpg",
@@ -205,7 +206,7 @@ export const products: Product[] = [
   },
   {
     "id": "1016",
-    "code": "3j4k9dk43",
+    "code": "aBTsR9MDYW",
     "name": "Digital Camera",
     "description": "High-resolution digital camera",
     "image": "digital-camera.jpg",
@@ -217,7 +218,7 @@ export const products: Product[] = [
   },
   {
     "id": "1017",
-    "code": "fj39dkf94",
+    "code": "fva7jGYvEP",
     "name": "Tote Bag",
     "description": "Stylish tote bag",
     "image": "tote-bag.jpg",
@@ -229,7 +230,7 @@ export const products: Product[] = [
   },
   {
     "id": "1018",
-    "code": "dkj349dj3",
+    "code": "jVv3d4mSH7",
     "name": "Diamond Necklace",
     "description": "Exquisite diamond necklace",
     "image": "diamond-necklace.jpg",
@@ -241,7 +242,7 @@ export const products: Product[] = [
   },
   {
     "id": "1019",
-    "code": "3j4k9dk43",
+    "code": "rpaSf38DWd",
     "name": "Wireless Headphones",
     "description": "Wireless noise-canceling headphones",
     "image": "wireless-headphones.jpg",
@@ -251,4 +252,4 @@ export const products: Product[] = [
     "inventoryStatus": "INSTOCK",
     "rating": 4.7
   }
-];
+]
