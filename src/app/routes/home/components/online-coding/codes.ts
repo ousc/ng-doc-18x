@@ -6,7 +6,7 @@ data class Product(
     var name: String? = null,
     var category: String? = null,
     var quantity: Int? = null
-): KPojo
+): KPojo()
 `.trim();
 
 export const $select: string = `

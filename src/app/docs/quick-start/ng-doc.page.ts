@@ -1,7 +1,7 @@
 import {NgDocPage} from '@ng-doc/core';
 
 const QuickStartPage: NgDocPage = {
-	title: `Quick Start`,
+	title: `快速上手`,
 	mdFile: './index.md',
 };
 

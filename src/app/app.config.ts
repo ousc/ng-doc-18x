@@ -7,7 +7,7 @@ import {
   provideMainPageProcessor,
   NG_DOC_DEFAULT_PAGE_PROCESSORS
 } from "@ng-doc/app";
-import {NG_DOC_ROUTING, provideNgDocContext} from "@ng-doc/generated";
+import {provideNgDocContext} from "@ng-doc/generated";
 import {provideHttpClient, withInterceptorsFromDi, withFetch, HttpClient} from "@angular/common/http";
 import {ApplicationConfig, importProvidersFrom} from '@angular/core';
 import {provideRouter, withInMemoryScrolling} from '@angular/router';

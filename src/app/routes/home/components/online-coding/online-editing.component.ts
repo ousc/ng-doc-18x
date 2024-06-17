@@ -105,6 +105,10 @@ interface Column {
   standalone: true,
   styles: [
     `
+      :host {
+        width: 100%;
+      }
+
       .logo {
         mix-blend-mode: color-dodge;
         transform: scale(2.5);

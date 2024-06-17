@@ -14,13 +14,15 @@ import {SharedModule} from "../../../shared.module";
         <div class="marquee-wrapper overflow-hidden flex">
           @for (i of [1,2,3];track i){
             <div class="marquee">
-              <div><img src="/assets/images/banner-marquee/java.svg" height="80" alt="jvm"></div>
-              <div><img src="/assets/images/banner-marquee/javascript.svg" height="60" alt="javascript"></div>
-              <div><img src="/assets/images/banner-marquee/macos.svg" height="80" alt="macos"></div>
-              <div><img src="/assets/images/banner-marquee/windows.svg" height="80" alt="windows"></div>
-              <div><img src="/assets/images/banner-marquee/linux.svg" height="80" alt="linux"></div>
-              <div><img src="/assets/images/banner-marquee/android.svg" height="80" alt="android"></div>
-              <div><img src="/assets/images/banner-marquee/ios.svg" height="60" alt="ios"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/fast.svg" height="50" alt="fast"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/light-weight.svg" height="80" alt="light-weight"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/safe.svg" height="50" alt="safe"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/multiplatform.svg" height="60" alt="multiplatform"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/mysql.svg" height="60" alt="mysql"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/sqlite.svg" height="60" alt="sqlite"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/oracle.svg" height="60" alt="oracle"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/postgres.svg" height="60" alt="postgres"></div>
+              <div><img draggable="false" src="/assets/images/banner-marquee/mssql.svg" height="60" alt="mssql"></div>
             </div>
           }
         </div>

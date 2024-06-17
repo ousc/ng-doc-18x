@@ -1,21 +1,153 @@
 <center>
-  <img src="https://cdn.leinbo.com/assets/images/kronos/logo_dark.png" width="200" alt="kronos-orm-logo">
+  <img src="/assets/images/logo_circle.png" width="200" alt="kronos-orm-logo">
 </center>
 
-##### Kronos ORM(Kotlin Reactive Object-Relational-Mapping)是一款前所未有的、开创性的、现代化的kotlin ORM框架。
+##### Kronos ORM(Kotlin Reactive Object-Relational-Mapping)是一款基于KCP、为K2设计的现代化的kotlin ORM框架。
 
-*Kronos*是一个轻量级的框架，为开发者提供了一种高效的数据持久化解决方案。
+*Kronos*是一个轻量级的框架，为开发者提供了一种简单操作多种数据库的方案。
 
-*Kronos*使用Kotlin K2编译器插件分析Kotlin Ir表达式树，实现了简洁而又语义化的数据持久层框架，让使用者在开发过程中可以更加高效地操作数据。
+*Kronos*使用KCP读取IR表达式，得以使ORM的编写简洁而又语义化，并且通过编译器插件，我们同时提供了Pojo和Map互转的简单方案。
 
-*Kronos*的设计初衷是为了弥补现有ORM框架中不足之处，并基于协程和任务机制对数据操作提供更加便捷和高效的编写体验.
-不仅如此，它还支持多种常见关系型数据库，包括Mysql、Oracle、Postgres、Mssql、SQLite、DB2、Sybase和H2，以及国产数据库OceanBase和DM8。
+*Kronos*的设计初衷是为了弥补现有ORM框架中不足之处，并基于协程和任务机制对数据操作提供更加便捷和高效的编写体验。
+我们支持多种常见关系型数据库，包括Mysql、Oracle、Postgres、Mssql、SQLite，更多数据库类型在我们的计划清单中，欢迎去[Github](Github)查看我们的最新进展。
 
 -------
 
-> 查询示例：
+# 快速上手：
 
-```kotlin
+
+## 1.添加依赖：
+
+kronos-orm是一个多模块的项目，我们提供了多个模块供开发者选择，开发者可以根据自己的需求选择对应的模块。
+
+其中：
+
+1. `kronos-core`是**必选模块**，它提供了基础的ORM功能
+2. `kronos-logging`是可选模块，它提供了多平台的日志功能
+3. `kronos-jvm-driver-wrapper`是可选模块，它提供了JVM驱动包装器。（您可以使用其他官方驱动包装器或自己编写包装类轻松地搭配第三方框架（如SpringData、Mybatis、Hibernate、Jdbi等）使用）
+4. `kronos-compiler-plugin`插件是**必选模块**，它为Kronos的ORM功能提供了编译时支持
+
+
+```kotlin group="import" name="gradle(kts)" icon="gradlekts"
+    dependencies {
+        implementation("com.kotlinorm.kronos-core") version "1.0.0"
+        implementation("com.kotlinorm.kronos-logging") version "1.0.0"
+        implementation("com.kotlinorm.kronos-jvm-driver-wrapper") version "1.0.0"
+    }
+    
+    plugins {
+        id("com.kotlinorm.kronos-compiler-plugin") version "1.0.0"
+    }
+```
+
+```groovy group="import" name="gradle(groovy)" icon="gradle"
+    dependencies {
+        implementation 'com.kotlinorm:kronos-core:1.0.0'
+        implementation 'com.kotlinorm:kronos-logging:1.0.0'
+        implementation 'com.kotlinorm:kronos-jvm-driver-wrapper:1.0.0'
+    }
+    
+    plugins {
+        id 'com.kotlinorm.kronos-compiler-plugin' version '1.0.0'
+    }
+```
+
+```xml group="import" name="maven" icon="maven"
+  <project>
+    <dependencies>
+      <dependency>
+        <groupId>com.kotlinorm</groupId>
+        <artifactId>kronos-core</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.kotlinorm</groupId>
+        <artifactId>kronos-logging</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.kotlinorm</groupId>
+        <artifactId>kronos-jvm-driver-wrapper</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+    </dependencies>
+  
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>com.kotlinorm</groupId>
+          <artifactId>kronos-compiler-plugin</artifactId>
+          <version>1.0.0</version>
+        </plugin>
+      </plugins>
+    </build>
+  </project>
+```
+
+## 2.配置数据库：
+
+这里仅介绍`kronos-jvm-driver-wrapper`模块的使用，其他模块的使用方式类似。
+需引入commons-dbcp2、mysql-connector-java等依赖。
+
+```kotlin group="KronosConfig" name="KronosConfig.kt"
+import com.kotlinorm.Kronos
+Kronos.apply {
+  dataSource = {
+    BasicDataSource().apply {
+        driverClassName = "com.mysql.cj.jdbc.Driver"
+        url = "jdbc:mysql://localhost:3306/kronos?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC"
+        username = "root"
+        password = "rootroot"
+    }
+  }
+  
+}
+```
+
+## 3.编写实体类：
+
+```kotlin group="KPojo" name="Director.kt"
+data class Director(
+    @PrimaryKey(identity = true)
+    var id: Int? = 0,
+    var name: String? = "",
+    var age: Int? = 0,
+    var movies: List<Movie>? = emptyList(),
+    @CreateTime
+    @DateTimeFormat("yyyy-MM-dd HH:mm:ss")
+    var createTime: String? = "",
+    @updateTime
+    @DateTimeFormat("yyyy-MM-dd HH:mm:ss")
+    var updateTime: String? = "",
+    @LogicDelete
+    var deleted: Boolean? = false
+): KPojo()
+```
+
+```kotlin group="KPojo" name="Movie.kt"
+@Table(name = "tb_movie")
+@TableIndex("idx_name_director", ["name", "director_id"], Mysql.KIndexType.UNIQUE, Mysql.KIndexMethod.BTREE)
+data class Movie(
+    @PrimaryKey(identity = true)
+    var id: Int? = 0,
+    @Column("name")
+    @ColumnType(CHAR)
+    @Default("UNKNOWN")
+    var name: String? = "",
+    var directorId: Long? = 0,
+    @Reference(["director_id"], ["id"])
+    var director: Director? = "",
+    var releaseTime: String? = "",
+    @LogicDelete
+    var deleted: Boolean? = false,
+    @CreateTime
+    var createTime: LocalDateTime? = "",
+    @updateTime
+    var updateTime: Date? = ""
+): KPojo()
+```
+
+```kotlin  name="database-operation.ts"
 User(1).insert().execute() // 插入单行数据
 listOfUser.insert().execute() // 批量插入多行数据
 
@@ -98,7 +230,6 @@ val affectRowNumber: Pair<Int, Int> =
         .by{ it.name + it.email }
         .execute()
 ```
-
 
 ------
 
