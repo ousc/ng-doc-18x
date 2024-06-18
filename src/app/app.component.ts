@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
   constructor(private primengConfig: PrimeNGConfig, private translate: TranslateService, private appService: AppService) {
   }
 
+  title = "Kronos"
+
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.translate.setDefaultLang(this.appService.language);

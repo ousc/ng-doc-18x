@@ -1,13 +1,15 @@
 import {Component} from '@angular/core';
 import {SharedModule} from "../../../shared.module";
+import {AnimateOnScrollModule} from "primeng/animateonscroll";
 
 @Component({
   selector: 'features',
   imports: [
     SharedModule,
+    AnimateOnScrollModule,
   ],
   template: `
-    <div class="flex flex-wrap justify-content-center gap-3 overflow-hidden">
+    <div pAnimateOnScroll enterClass="fadeinleft" leaveClass="fadeoutleft" class="flex flex-wrap justify-content-center gap-3 overflow-hidden animation-duration-1000 animation-ease-in-out">
       <p-card header="Kotlin multiplatform support" subheader="Card Subheader" [style]="{ minWidth: 'calc(100vw / 3)', maxWidth: '525px'}">
         <ng-template pTemplate="header">
           <img class="card-cover" alt="Kotlin multiplatform support" src="/assets/images/features/img-1.png" />

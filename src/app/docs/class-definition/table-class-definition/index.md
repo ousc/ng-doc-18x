@@ -1,18 +1,60 @@
-# KPojo数据表类定义
+# {{ NgDocPage.title }}
 
-在Kronos中声明一个data class为数据表类非常简单，只需要让该类继承`KPojo`即可。
-
-简单示例：
-
+在Kronos中声明一个data class为数据表类非常简单，只需要让该类继承`KPojo`即可，以下是一个简单示例：
 ```kotlin
 import com.kotlinorm.beans.dsl.KPojo
 
 data class User(
-    val id: Int,
-    val name: String,
-    val age: Int
+    val id: Int? = null,
+    val name: String? = null,
+    val age: Int? = null
 ) : KPojo()
 ```
+
+复杂数据类及使用数据库表操作时在不同数据库中建表语句示例：
+
+```kotlin group="KPojo" name="User.kt" icon="kotlin"
+@Table(name = "tb_user")
+@TableIndex("idx_username", ["username"], "UNIQUE")
+@TableIndex(name = "idx_multi", columns = ["id", "username"], "UNIQUE")
+data class User(
+    @PrimaryKey(identity = true)
+    var id: Int? = null,
+    @Column("name")
+    @NotNull
+    var username: String? = null,
+    @ColumnType(TINYINT)
+    @Default("0")
+    var age: Int? = null,
+    @CreateTime
+    @DateTimeFormat("yyyy-MM-dd HH:mm:ss")
+    var createTime: String? = null,
+    @NotNull
+    var companyId: Int? = null,
+    @Reference(["company_id"], ["id"])
+    var company: Company? = null,
+    @UpdateTime
+    var updateTime: LocalDateTime? = null,
+    @LogicDelete
+    var deleted: Boolean? = null
+) : KPojo()
+```
+
+```sql group="KPojo" name="Mysql" icon="mysql"
+```
+
+```sql group="KPojo" name="Sqlite" icon="sqlite"
+```
+
+```sql group="KPojo" name="PostgreSql" icon="postgres"
+```
+
+```sql group="KPojo" name="Mssql" icon="sqlserver"
+```
+
+```sql group="KPojo" name="Oracle" icon="oracle"
+```
+
 
 我们通过一些注解和配置项来定义数据表的属性，如：主键、自增、唯一键、索引等。
 
@@ -29,7 +71,7 @@ data class User(
 |-----------------------|------------------------|----------------------|
 | `tableNamingStrategy` | `KronosNamingStrategy` | `NoneNamingStrategy` |
 
-通过创建`KronosNamingStrategy`的实现类来自定义表名策略（详见：[KronosNamingStrategy](/KronosNamingStrategy)），然后在配置文件中指定该实现类。
+通过创建`KronosNamingStrategy`的实现类来自定义表名策略（详见：[命名策略](/documentation/class-definition/naming-strategy)），然后在配置文件中指定该实现类。
 
 我们默认提供了`LineHumpNamingStrategy`表名策略：
 
@@ -45,7 +87,7 @@ Kronos.tableNamingStrategy = LineHumpNamingStrategy
 |-----------------------|------------------------|----------------------|
 | `fieldNamingStrategy` | `KronosNamingStrategy` | `NoneNamingStrategy` |
 
-通过创建`KronosNamingStrategy`的实现类来自定义表名策略（详见：[KronosNamingStrategy](/KronosNamingStrategy)），然后在配置文件中指定该实现类。
+通过创建`KronosNamingStrategy`的实现类来自定义表名策略（详见：[命名策略](/documentation/class-definition/naming-strategy)），然后在配置文件中指定该实现类。
 
 我们默认提供了`LineHumpNamingStrategy`表名策略：
 
@@ -61,7 +103,7 @@ Kronos.fieldNamingStrategy = LineHumpNamingStrategy
 |----------------------|------------------------|------------------------------------------------------------|
 | `createTimeStrategy` | `KronosCommonStrategy` | `KronosCommonStrategy(false, "create_time", "createTime")` |
 
-通过创建`KronosCommonStrategy`的实现类来自定义创建时间策略（详见：[KronosCommonStrategy](/KronosCommonStrategy)），然后在配置文件中指定该实现类。
+通过创建`KronosCommonStrategy`的实现类来自定义创建时间策略（详见：[通用策略](/documentation/class-definition/common-strategy)），然后在配置文件中指定该实现类。
 
 创建时间策略的全局默认关闭，需要手动开启。
 
@@ -77,7 +119,7 @@ Kronos.createTimeStrategy = KronosCommonStrategy(true, Field("create_time", "cre
 |----------------------|------------------------|------------------------------------------------------------|
 | `updateTimeStrategy` | `KronosCommonStrategy` | `KronosCommonStrategy(false, "update_time", "updateTime")` |
 
-通过创建`KronosCommonStrategy`的实现类来自定义更新时间策略（详见：[KronosCommonStrategy](/KronosCommonStrategy)），然后在配置文件中指定该实现类。
+通过创建`KronosCommonStrategy`的实现类来自定义更新时间策略（详见：[通用策略](/documentation/class-definition/common-strategy)），然后在配置文件中指定该实现类。
 
 更新时间策略的全局默认关闭，需要手动开启。
 
@@ -93,7 +135,7 @@ Kronos.updateTimeStrategy = KronosCommonStrategy(true, Field("update_time", "upd
 |-----------------------|------------------------|------------------------------------------|
 | `logicDeleteStrategy` | `KronosCommonStrategy` | `KronosCommonStrategy(false, "deleted")` |
 
-通过创建`KronosCommonStrategy`的实现类来自定义逻辑删除策略（详见：[KronosCommonStrategy](/KronosCommonStrategy)），然后在配置文件中指定该实现类。
+通过创建`KronosCommonStrategy`的实现类来自定义逻辑删除策略（详见：[通用策略](/documentation/class-definition/common-strategy)），然后在配置文件中指定该实现类。
 
 逻辑删除策略的全局默认关闭，需要手动开启。
 
@@ -130,9 +172,44 @@ Kronos.defaultTimeZone = TimeZone.currentSystemDefault()
 Kronos.defaultTimeZone = TimeZone.of("GMT+8")
 ```
 
-## 注解配置
+### 序列化解析器
 
-### 表名设置
+| 参数名                 | 类型                        | 默认值                     |
+|---------------------|---------------------------|-------------------------|
+| `serializeResolver` | `KronosSerializeResolver` | `NoneSerializeResolver` |
+
+通过创建`KronosSerializeResolver`的实现类来自定义序列化解析器（详见：[序列化解析器](/documentation/class-definition/serialize-resolver)），然后在配置文件中指定该实现类。
+
+如可以通过引入`GSON`库来实现序列化解析器：
+
+
+```kotlin group="GsonResolver" name="GsonResolver.kt" icon="kotlin"
+object GsonResolver : KronosSerializeResolver {
+    override fun <T> deserialize(serializedStr: String, kClass: KClass<*>): T {
+        return Gson().fromJson<T>(serializedStr, kClass.java)
+    }
+
+    override fun deserializeObj(serializedStr: String, kClass: KClass<*>): Any {
+        return Gson().fromJson(serializedStr, kClass.java)
+    }
+
+    override fun serialize(obj: Any): String {
+        return Gson().toJson(obj)
+    }
+}
+```
+
+```kotlin group="GsonResolver" name="KronosConfig.kt" icon="kotlin"
+Kronos.serializeResolver = GsonResolver
+```
+
+这里我们使用`GSON`库来实现序列化解析器，你可以使用任何库如`Kotlinx.serialization`、`Jackson`、`Moshi`、`FastJson`等。
+
+## 注解配置项
+
+### 表名
+
+`@Table(name: String)`
 
 用于指定数据表的表名，如果不指定则使用默认的表名策略。
 
@@ -150,6 +227,8 @@ data class User(
 ```
 
 ### 表索引
+
+`@TableIndex(name: String, columns: Array<String>, type: String, method: String)`
 
 用于指定数据表的索引，如果不指定则不创建索引。
 
@@ -172,6 +251,8 @@ data class User(
 
 ### 表创建时间
 
+`@CreateTime(enabled: Boolean)`
+
 用于指定数据表是否开启创建时间策略，如果不指定则使用全局设置。
 
 **参数**：
@@ -186,6 +267,8 @@ data class User(
 ```
 
 ### 表更新时间
+
+`@UpdateTime(enabled: Boolean)`
 
 用于指定数据表是否开启更新时间策略，如果不指定则使用全局设置。
 
@@ -202,6 +285,8 @@ data class User(
 
 ### 表逻辑删除
 
+`@LogicDelete(enabled: Boolean)`
+
 用于指定数据表是否开启逻辑删除策略，如果不指定则使用全局设置。
 
 **参数**：
@@ -217,6 +302,8 @@ data class User(
 
 ### 列名设置
 
+`@Column(name: String)`
+
 用于指定数据表的列名，如果不指定则使用默认的列名策略。
 
 **参数**：
@@ -230,6 +317,8 @@ data class User(
 ```
 
 ### 列日期格式化
+
+`@DateTimeFormat(pattern: String)`
 
 用于指定数据表的日期/时间格式，如果不指定则使用默认的日期/时间格式。
 
@@ -245,17 +334,20 @@ data class User(
 
 ### 列反序列化设置
 
+`@ColumnDeserialize`
+
 用于声明该列是否需要反序列化，如果不指定则默认不反序列化，若启用反序列化，将调用`Kronos.serializeResolver.deserialize`方法将该列的值反序列化为指定类型。
 
 ```kotlin
 data class User(
     @ColumnDeserialize
-    val info: String? = null
+    val info: List<String>? = emptyList()
 ) : KPojo()
-
 ```
 
 ### 列关联设置
+
+`@Reference(referenceColumn: Array<String>, targetColumn: Array<String>, cascade: String, mapperBy: String)`
 
 此注解用于声明列关联，包括关联查询、关联更新、关联删除等。支持一对一、一对多、多对一、多对多关联。
 kronos将关联列视为自定义属性，不会将其识别为数据库字段。
@@ -264,7 +356,7 @@ kronos将关联列视为自定义属性，不会将其识别为数据库字段�
 - referenceColumn `Array<String>`：关联列名
 - targetColumn `Array<String>`：关联目标列名
 - cascade `String`：关联级联策略（可选）
-- mapperBy `String`：维护端列名（可选）
+- mapperBy `Array<String>`：维护端表名（可选）
 
 ```kotlin
 @Table("tb_user")
@@ -284,6 +376,8 @@ data class Company(
 
 ### 列主键设置
 
+`@PrimaryKey(identity: Boolean)`
+
 此注解用于声明列为主键。
 
 **参数**：
@@ -299,8 +393,10 @@ data class User(
 
 ### 列类型及长度
 
-对于不同的数据库类型，kronos会根据kotlin类型自动转换类型，您可以参考[类型对照表](/TypeConversion)查看Kotlin数据类型在各个数据库中的映射关系。
-您可以通过此注解声明列类型及长度，如果不指定则使用默认的类型及长度，全部类型信息请参考：[字段类型](/KColumnType)
+`@ColumnType(type: String, length: Int)`
+
+对于不同的数据库类型，kronos会根据kotlin类型自动转换类型，您可以参考[Kotlin列类型推断](/documentation/class-definition/kotlin-type-to-kcolumn-type)查看Kotlin数据类型在各个数据库中的映射关系。
+您可以通过此注解声明列类型及长度，如果不指定则使用默认的类型及长度，全部类型信息请参考：[Kronos列类型](/documentation/class-definition/kcolumn-type)
 
 **参数**：
 - type `String`：类型
@@ -316,6 +412,8 @@ data class User(
 
 ### 列非空约束
 
+`@NotNull`
+
 此注解用于声明列为非空，如果不指定则使用默认的非空约束
 
 ```kotlin
@@ -327,6 +425,8 @@ data class User(
 ```
 
 ### 列创建时间
+
+`@CreateTime`
 
 此注解用于声明列为创建时间字段，如果不指定则使用默认的创建时间策略。
 
@@ -343,6 +443,8 @@ data class User(
 
 ### 列更新时间
 
+`@UpdateTime`
+
 此注解用于声明列为更新时间字段，如果不指定则使用默认的更新时间策略。
 
 **参数**：
@@ -358,6 +460,8 @@ data class User(
 
 ### 列逻辑删除
 
+`@LogicDelete`
+
 此注解用于声明列为逻辑删除字段，如果不指定则使用默认的逻辑删除策略。
 
 **参数**：
@@ -370,7 +474,6 @@ data class User(
     val deleted: String? = null
 ): KPojo()
 ```
-
 
 
 

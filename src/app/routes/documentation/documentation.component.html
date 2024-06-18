@@ -1,7 +1,12 @@
 <ng-doc-root>
-  <ng-doc-navbar [leftContent]="leftContent">
+  <ng-doc-navbar [leftContent]="leftContent" [centerContent]="centerContent">
     <ng-template #leftContent>
-      <h3 class="m-0 text-gray-300 cursor-pointer" [routerLink]="['/']">Kronos ORM</h3>
+      <p-button severity="contrast" [size]="'small'" [routerLink]="['/']">
+        <img class="logo mr-1" src="/assets/images/logo_circle.png" width="20" />
+        <span>Kronos ORM</span>
+      </p-button>
+    </ng-template>
+    <ng-template #centerContent>
     </ng-template>
   </ng-doc-navbar>
   <ng-doc-sidebar></ng-doc-sidebar>

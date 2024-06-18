@@ -22,7 +22,7 @@ import {SharedModule} from "../../../shared.module";
       {{ ("DESCRIPTION3") | translate }}
     </p>
     <div class="flex align-items-center gap-3">
-      <p-button [routerLink]="['/documentation/quick-start']" [label]="'GET_START' | translate" icon="pi pi-arrow-right" severity="info" size="large"/>
+      <p-button [routerLink]="['/documentation/getting-started/quick-start']" [label]="'GET_START' | translate" icon="pi pi-arrow-right" severity="info" size="large"/>
       <p-button severity="warning" size="large">
         <i class="pi pi-github mr-3"></i>
         <span>{{ "GIVE_A_STAR" | translate }}</span>
