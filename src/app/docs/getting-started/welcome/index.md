@@ -10,7 +10,7 @@
 
 *Kronos*的设计初衷是为了弥补现有ORM框架中不足之处，并基于协程和任务机制对数据操作提供更加便捷和高效的编写体验。
 
-我们支持多种常见关系型数据库，包括Mysql、Oracle、Postgres、Mssql、SQLite，更多数据库类型在我们的计划清单中，欢迎在[Github](Github)查看我们的最新进展。
+我们支持多种常见关系型数据库，包括Mysql、Oracle、Postgres、Mssql、SQLite，更多数据库类型在我们的计划清单中，欢迎在[Github](https://github.com/Kronos-orm/Kronos-orm)查看我们的最新进展。
 
 ```kotlin name="demo" icon="kotlin"
 if(!db.table.exsits<User>()){
