@@ -475,5 +475,46 @@ data class User(
 ): KPojo()
 ```
 
+### 级联关系声明
+
+`@Reference`
+
+此注解用于声明列所在字段为关联字段，并指定关联信息。
+
+**参数**：
+- referenceFields `Array<String>`: 本实体中用于关联的字段（属性名）
+- targetFields `Array<String>`: 目标实体中用于关联的字段（属性名）
+- onDelete `CascadeDeleteAction`: 指定级联删除时的方式（可选，默认为无操作）
+- defaultValue `Array<String>`: 指定级联删除方式为"SET DEFAULT"时设置的默认值
+- mapperBy `KClass<out KPojo>`: 用于指定本关联关系的维护端（为空时表示维护端为本实体，若两端都有该注解时不能为空）
+- usage `Array<KOperationType>`: 用于声明本实体需要用到的关联操作（可选，默认为"INSERT, UPDATE, DELETE, UPSERT, SELECT"全选）
+
+```kotlin
+@Table(name = "student")
+data class Student(
+    @PrimaryKey(identity = true)
+    var id: Int? = null,
+    
+    var name: String? = null,
+    var studentNo: String? = null,
+    var schoolName: String? = null,
+    
+    var groupClassName: String? = null,
+    
+    @Reference(
+        ["groupClassName", "schoolName"],
+        ["name", "schoolName"],
+        CascadeDeleteAction.SET_DEFAULT,
+        [“class 1”， "Senior School"],
+        GroupClass::class,
+        [KOperationType.UPDATE , KOperationType.DELETE]
+    )
+    var groupClass: GroupClass? = null,
+    
+    @CreateTime
+    @DateTimeFormat("yyyy@MM@dd HH:mm:ss")
+    val createTime: String? = null
+) : KPojo
+```
 
 
